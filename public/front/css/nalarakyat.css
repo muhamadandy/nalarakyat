@@ -1,0 +1,425 @@
+.bg-\[\#FF6B18\] {
+    background-color: #b91c1c;
+}
+.text-\[\#FF6B18\] {
+    color: #b91c1c;
+}
+.bg-\[\#FFECE1\] {
+    background-color: #fee2e2;
+}
+.hover\:ring-\[\#FF6B18\]:hover,
+.focus-within\:ring-\[\#FF6B18\]:focus-within {
+    --tw-ring-color: #b91c1c;
+}
+.hover\:shadow-\[0_10px_20px_0_\#FF6B1880\]:hover {
+    box-shadow: 0 10px 20px 0 #b91c1c80;
+}
+
+#Content-wrapper p,
+#Content-wrapper ul,
+#Content-wrapper ol,
+#Content-wrapper h2,
+#Content-wrapper h3 {
+    margin-bottom: 16px;
+}
+
+#Content-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 24px 0;
+}
+
+#Content-wrapper .attachment__name,
+#Content-wrapper .attachment__size {
+    display: none;
+}
+
+#Content-wrapper figure {
+    margin: 24px 0;
+}
+
+#Content-wrapper figcaption:empty {
+    display: none;
+}
+
+/* ===== Responsif: fondasi ===== */
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* Beri jarak samping saat layar lebih sempit dari konten (1130px) */
+@media (max-width: 1160px) {
+    #Navbar,
+    #Category,
+    #Headline,
+    section.max-w-\[1130px\],
+    #Up-to-date.w-full > div {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* ===== Responsif: navbar (tablet dan HP) ===== */
+@media (max-width: 767px) {
+    #Navbar {
+        margin-top: 16px !important;
+    }
+
+    #Navbar .logo-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px !important;
+        width: 100%;
+    }
+
+    #Navbar .logo-container > a {
+        justify-content: center;
+    }
+
+    #Navbar .logo-container > .h-12 {
+        display: none;
+    }
+
+    #Navbar form {
+        width: 100% !important;
+    }
+
+    #Category {
+        margin-top: 16px !important;
+        gap: 8px !important;
+    }
+
+    #Category a {
+        padding: 8px 14px !important;
+        font-size: 14px;
+    }
+}
+
+/* ===== Responsif: beranda (tablet, <= 991px) ===== */
+@media (max-width: 991px) {
+    /* Kartu berita: 3 kolom -> 2 kolom */
+    #Up-to-date .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 20px !important;
+    }
+
+    /* Penulis: 6 kolom -> 3 kolom */
+    #Best-authors .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+    }
+
+    /* Section per kategori: kartu besar di atas, daftar di bawah */
+    section[id^="Latest-"] > div:nth-child(2) {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 20px;
+    }
+
+    section[id^="Latest-"] .featured-news-card {
+        height: 320px !important;
+        flex: none !important;
+    }
+
+    section[id^="Latest-"] .custom-scrollbar {
+        width: 100% !important;
+        height: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow: visible !important;
+    }
+
+    section[id^="Latest-"] .custom-scrollbar > div:first-child {
+        width: 100% !important;
+    }
+
+    /* Gradasi putih di bawah daftar tidak diperlukan lagi */
+    section[id^="Latest-"] .custom-scrollbar > .sticky {
+        display: none;
+    }
+}
+
+/* ===== Responsif: beranda (HP, <= 767px) ===== */
+@media (max-width: 767px) {
+    /* Carousel unggulan */
+    #Featured .featured-news-card {
+        height: 360px !important;
+    }
+
+    #Featured .card-detail {
+        padding: 0 16px 24px !important;
+    }
+
+    #Featured .card-detail a {
+        font-size: 22px !important;
+        line-height: 30px !important;
+    }
+
+    /* Tombol panah dikecilkan dan dirapatkan ke bawah */
+    #Featured .prevNextButtons {
+        display: none !important;
+    }
+
+    /* Judul section */
+    section h2 {
+        font-size: 20px !important;
+        line-height: 30px !important;
+    }
+
+    section .flex.justify-between.items-center {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Kartu berita: 1 kolom */
+    #Up-to-date .grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    /* Penulis: 2 kolom */
+    #Best-authors .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    /* Section kategori */
+    section[id^="Latest-"] .featured-news-card {
+        height: 260px !important;
+    }
+
+    section[id^="Latest-"] .card-detail {
+        padding: 20px !important;
+    }
+
+    section[id^="Latest-"] .card-detail a {
+        font-size: 20px !important;
+        line-height: 28px !important;
+    }
+
+    /* Banner iklan lebar mengikuti lebar layar */
+    #Advertisement > div {
+        width: 100% !important;
+        max-width: 900px;
+    }
+
+    #Advertisement > div > a > div {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 15 / 2;
+    }
+}
+
+/* ===== Responsif: detail artikel (tablet, <= 991px) ===== */
+@media (max-width: 991px) {
+    /* Isi artikel di atas, sidebar pindah ke bawah */
+    #Article-container {
+        flex-direction: column !important;
+        gap: 40px !important;
+    }
+
+    #Article-container > .flex-1 {
+        width: 100%;
+    }
+
+    #Article-container .side-bar {
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    /* Banner sidebar tidak melebar berlebihan */
+    #Article-container .side-bar .ads img {
+        max-width: 400px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* Judul artikel */
+    #Title {
+        font-size: 34px !important;
+        line-height: 44px !important;
+    }
+}
+
+/* ===== Responsif: detail artikel (HP, <= 767px) ===== */
+@media (max-width: 767px) {
+    header.flex-col {
+        margin-top: 30px !important;
+        gap: 24px !important;
+    }
+
+    /* Judul: tampil utuh, tidak dipotong 2 baris oleh script */
+    #Title {
+        font-size: 26px !important;
+        line-height: 36px !important;
+        display: block !important;
+        overflow: visible !important;
+        -webkit-line-clamp: unset !important;
+    }
+
+    #Headline {
+        gap: 12px !important;
+    }
+
+    /* Gambar utama lebih pendek */
+    header.flex-col > div:last-child {
+        height: 240px !important;
+    }
+
+    #Article-container {
+        margin-top: 30px !important;
+    }
+
+    /* Isi artikel */
+    #Content-wrapper {
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    #Content-wrapper img,
+    #Content-wrapper iframe,
+    #Content-wrapper video {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    #Content-wrapper table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    /* Kotak penulis lebih rapat */
+    #Article-container a.block > div {
+        padding: 16px !important;
+    }
+}
+
+/* ===== Responsif: kategori, penulis, pencarian (tablet, <= 991px) ===== */
+@media (max-width: 991px) {
+    /* Grid kartu: 3 kolom -> 2 kolom */
+    #search-cards,
+    #content-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 20px !important;
+    }
+
+    /* Form pencarian besar di halaman search */
+    #heading form,
+    #heading label {
+        width: 100% !important;
+        max-width: 500px;
+    }
+}
+
+/* ===== Responsif: kategori, penulis, pencarian (HP, <= 767px) ===== */
+@media (max-width: 767px) {
+    /* Grid kartu: 1 kolom */
+    #search-cards,
+    #content-cards {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    /* Margin atas section */
+    #Category-result,
+    #author,
+    #heading {
+        margin-top: 40px !important;
+        gap: 20px !important;
+    }
+
+    /* Judul halaman kategori dan pencarian */
+    #Category-result h1,
+    #heading h1 {
+        font-size: 26px !important;
+        line-height: 34px !important;
+    }
+
+    /* Judul "Berita Penulis / [profil]" ditumpuk vertikal */
+    #author #title {
+        flex-direction: column !important;
+        gap: 12px !important;
+        text-align: center;
+    }
+
+    #author #title h1 {
+        font-size: 26px !important;
+        line-height: 34px !important;
+    }
+
+    /* Tanda "/" tidak diperlukan saat bertumpuk */
+    #author #title h1:nth-of-type(2) {
+        display: none;
+    }
+
+    /* Hasil pencarian */
+    #search-result {
+        margin-top: 40px !important;
+        margin-bottom: 60px !important;
+    }
+
+    #search-result h2 {
+        font-size: 20px !important;
+        line-height: 30px !important;
+    }
+
+    /* Pagination lebih kecil */
+    nav[style*="justify-content:center"] a,
+    nav[style*="justify-content:center"] span {
+        min-width: 36px !important;
+        height: 36px !important;
+        padding: 0 10px !important;
+    }
+}
+
+/* ===== Responsif: halaman 404 (HP, <= 767px) ===== */
+@media (max-width: 767px) {
+    section[style*="margin-top:100px"] {
+        margin-top: 60px !important;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    section[style*="margin-top:100px"] p[style*="font-size:96px"] {
+        font-size: 72px !important;
+    }
+
+    section[style*="margin-top:100px"] h1 {
+        font-size: 26px !important;
+        line-height: 34px !important;
+    }
+}
+
+/* ===== Menu kategori: banyak kategori ===== */
+
+/* Desktop dan tablet: membungkus ke baris baru */
+@media (min-width: 768px) {
+    #Category {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 767px) {
+    #Category {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        /* Ruang untuk ring hover agar tidak terpotong */
+        padding-top: 4px !important;
+        padding-bottom: 6px !important;
+        margin-top: 12px !important;
+    }
+
+    #Category::-webkit-scrollbar {
+        display: none;
+    }
+
+    #Category a {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+}
