@@ -1,66 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Nalarakyat
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portal berita dengan panel admin untuk mengelola artikel, kategori, penulis, dan iklan banner. Frontend dibangun dari template HTML milik sendiri yang diubah menjadi view Blade dinamis, responsif di desktop, tablet, dan HP.
 
-## About Laravel
+![Beranda](docs/screenshots/beranda-desktop.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Frontend (pembaca)**
+- Beranda: carousel artikel unggulan, berita terbaru, daftar penulis, dan section per kategori
+- Halaman detail artikel dengan sidebar, kotak penulis, tulisan lain dari penulis, dan artikel terkait
+- Halaman kategori, penulis, dan pencarian dengan pagination
+- Iklan banner di 4 posisi: header, sidebar, dalam artikel, dan footer
+- Tampilan responsif (desktop, tablet, HP)
+- SEO dasar: meta description, Open Graph, canonical, `sitemap.xml`, `robots.txt`
+- Halaman 404 berbahasa Indonesia
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Panel admin (`/admin`)**
+- Login kustom dengan tampilan bermerek Nalarakyat
+- CRUD artikel, kategori, penulis, dan iklan banner
+- Soft delete dengan pemulihan dan hapus permanen
+- Rich text editor dengan upload gambar di dalam isi artikel
+- Slug otomatis dan unik
+- Dasbor: kartu statistik, grafik artikel per bulan, dan tabel artikel terbaru
+- Admin menginput semua konten. Penulis tidak memiliki akun login.
 
-## Learning Laravel
+## Teknologi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Bagian | Teknologi |
+|---|---|
+| Backend | Laravel 11.57, PHP 8.2 |
+| Panel admin | Filament 3.3 |
+| Database | MySQL |
+| Frontend | Blade, Tailwind CSS (hasil kompilasi template), Flickity |
+| Lingkungan lokal | Laravel Herd (Windows) |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tampilan
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Beranda | Detail artikel |
+|---|---|
+| ![Beranda](docs/screenshots/beranda-desktop.png) | ![Detail](docs/screenshots/detail-desktop.png) |
 
-## Laravel Sponsors
+| Kategori | Mobile |
+|---|---|
+| ![Kategori](docs/screenshots/kategori-desktop.png) | ![Beranda mobile](docs/screenshots/beranda-mobile.png) ![Detail mobile](docs/screenshots/detail-mobile.png) |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+| Dasbor admin | Form artikel |
+|---|---|
+| ![Dasbor](docs/screenshots/admin-dasbor.png) | ![Form artikel](docs/screenshots/admin-artikel.png) |
 
-### Premium Partners
+![Login admin](docs/screenshots/admin-login.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Instalasi
 
-## Contributing
+Prasyarat: PHP 8.2+ (ekstensi `intl`, `gd`, `mbstring`, `pdo_mysql`), Composer, dan MySQL.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/muhamadandy/nalarakyat.git
+cd nalarakyat
 
-## Code of Conduct
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Atur koneksi database di `.env`:
 
-## Security Vulnerabilities
+```dotenv
+APP_URL=http://nalarakyat.test
+APP_LOCALE=id
+APP_TIMEZONE=Asia/Jakarta
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DB_CONNECTION=mysql
+DB_DATABASE=nalarakyat
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## License
+Buat database kosong bernama `nalarakyat`, lalu jalankan:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate --seed
+php artisan storage:link
+php artisan serve
+```
+
+Dengan Laravel Herd, letakkan proyek di folder Herd dan buka `http://nalarakyat.test`. Tanpa Herd, buka `http://127.0.0.1:8000` dan sesuaikan `APP_URL`.
+
+## Akun demo
+
+| Halaman | URL | Email | Password |
+|---|---|---|---|
+| Panel admin | `/admin` | `admin@nalarakyat.test` | `password` |
+
+Akun ini hanya untuk lingkungan lokal. Di produksi, isi `ADMIN_EMAIL` dan `ADMIN_PASSWORD` di `.env` dengan nilai yang kuat sebelum menjalankan seeder.
+
+## Data contoh
+
+`php artisan migrate --seed` membuat:
+
+- 1 akun admin (selalu dibuat)
+- 4 kategori, 4 penulis, 24 artikel, dan 5 banner aktif (hanya di lingkungan non-produksi)
+
+Gambar contoh dibuat otomatis dengan ekstensi GD dan disimpan di `storage/app/public/seed`, jadi tidak ada gambar berhak cipta di repository. Seeder data contoh tidak berjalan saat `APP_ENV=production`.
+
+## Struktur penting
+
+```
+app/
+├── Filament/
+│   ├── Pages/Auth/Login.php        # Login kustom
+│   ├── Resources/                  # Artikel, kategori, penulis, banner
+│   └── Widgets/                    # Statistik, grafik, artikel terbaru
+├── Http/Controllers/FrontController.php
+└── Models/
+database/seeders/                   # AdminSeeder, SampleDataSeeder
+resources/views/front/              # Layout, halaman, dan partial frontend
+public/front/                       # Aset template (CSS, JS, gambar)
+```
+
+## Catatan teknis
+
+- **Penulis dipisah dari `users`.** Tabel `users` hanya untuk admin yang login, sedangkan `authors` hanyalah profil yang ditampilkan di artikel.
+- **Soft delete pada semua model utama.** Relasi artikel ke kategori dan penulis memakai `withTrashed()` agar artikel lama tidak error saat kategori atau penulisnya dihapus.
+- **Slug unik.** Slug dibuat saat data dibuat dan tidak berubah saat judul diedit, supaya tautan yang sudah dibagikan tidak rusak. Jika ada duplikat, ditambahkan akhiran angka.
+- **URL gambar relatif.** Disk `public` memakai `'url' => '/storage'` agar gambar di dalam isi artikel tidak menyimpan nama domain dan tetap aman saat pindah server.
+- **Responsif lewat override CSS.** `output.css` dari template adalah hasil kompilasi dan tidak memuat class Tailwind baru, jadi penyesuaian layar kecil ditulis sebagai media query di `public/front/css/nalarakyat.css` tanpa mengubah tampilan desktop.
+- **Penyisipan iklan dalam artikel.** Banner posisi "Dalam Artikel" disisipkan setelah paragraf ke-2 pada isi artikel, dan tidak ditampilkan jika artikel terlalu pendek.
+
+## Rencana pengembangan
+
+- Tanggal mulai dan berakhir tayang pada iklan banner
+- Peran admin (editor dan pengelola iklan)
+- Pembersihan otomatis file gambar yatim saat artikel dihapus permanen
+- Halaman "Pasang Iklan" untuk calon pengiklan
+
+## Lisensi
+
+Kode aplikasi ini dibuat oleh Muhamad Andy sebagai proyek magang. Tentukan lisensi sebelum dipakai ulang oleh pihak lain.
