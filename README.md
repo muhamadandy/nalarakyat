@@ -4,6 +4,8 @@ Portal berita dengan panel admin untuk mengelola artikel, kategori, penulis, dan
 
 ![Beranda](docs/screenshots/beranda-desktop.png)
 
+**Demo:** [nalarakyat.web.id](https://nalarakyat.web.id)
+
 ## Fitur
 
 **Frontend (pembaca)**
@@ -33,6 +35,7 @@ Portal berita dengan panel admin untuk mengelola artikel, kategori, penulis, dan
 | Database | MySQL |
 | Frontend | Blade, Tailwind CSS (hasil kompilasi template), Flickity |
 | Lingkungan lokal | Laravel Herd (Windows) |
+| Hosting | cPanel (shared hosting) |
 
 ## Tampilan
 
@@ -52,7 +55,7 @@ Portal berita dengan panel admin untuk mengelola artikel, kategori, penulis, dan
 
 ## Instalasi
 
-Prasyarat: PHP 8.2+ (ekstensi `intl`, `gd`, `mbstring`, `pdo_mysql`), Composer, dan MySQL.
+Prasyarat: PHP 8.2+ (ekstensi `intl`, `gd`, `mbstring`, `fileinfo`, `zip`, `exif`, `pdo_mysql`, `bcmath`), Composer, dan MySQL.
 
 ```bash
 git clone https://github.com/muhamadandy/nalarakyat.git
@@ -86,13 +89,15 @@ php artisan serve
 
 Dengan Laravel Herd, letakkan proyek di folder Herd dan buka `http://nalarakyat.test`. Tanpa Herd, buka `http://127.0.0.1:8000` dan sesuaikan `APP_URL`.
 
-## Akun demo
+## Akun admin
+
+Setelah `php artisan migrate --seed`, akun admin lokal dibuat dengan data berikut:
 
 | Halaman | URL | Email | Password |
 |---|---|---|---|
 | Panel admin | `/admin` | `admin@nalarakyat.test` | `password` |
 
-Akun ini hanya untuk lingkungan lokal. Di produksi, isi `ADMIN_EMAIL` dan `ADMIN_PASSWORD` di `.env` dengan nilai yang kuat sebelum menjalankan seeder.
+Akun ini hanya untuk lingkungan lokal. Di produksi, isi `ADMIN_EMAIL` dan `ADMIN_PASSWORD` di `.env` dengan nilai yang kuat sebelum menjalankan seeder. Panel admin di situs demo tidak dibuka untuk umum.
 
 ## Data contoh
 
@@ -117,6 +122,27 @@ database/seeders/                   # AdminSeeder, SampleDataSeeder
 resources/views/front/              # Layout, halaman, dan partial frontend
 public/front/                       # Aset template (CSS, JS, gambar)
 ```
+
+## Deploy ke shared hosting (cPanel)
+
+Struktur yang dipakai: kode aplikasi di luar `public_html`, hanya isi folder `public` yang bisa diakses web.
+
+```
+/home/<user>/
+├── nalarakyat/     # seluruh proyek (tidak bisa diakses web)
+└── public_html/    # isi folder public
+```
+
+Ringkasan langkah:
+
+1. Siapkan `.env` produksi (`APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` domain asli) dan jalankan `composer install --no-dev --optimize-autoloader`.
+2. Upload proyek, salin isi `public/` ke `public_html/`, lalu ubah tiga path di `public_html/index.php` agar menunjuk ke folder `nalarakyat`.
+3. Buat storage link: `ln -s ~/nalarakyat/storage/app/public ~/public_html/storage`.
+4. Impor database. Jika server memakai MySQL lama atau MariaDB, ganti collation `utf8mb4_0900_ai_ci` menjadi `utf8mb4_unicode_ci` di file SQL dan isi `DB_COLLATION=utf8mb4_unicode_ci` di `.env`.
+5. Jalankan `php artisan config:cache`, `route:cache`, dan `view:cache`.
+6. Aktifkan SSL (AutoSSL) dan pastikan `/.env` tidak bisa diakses dari browser.
+
+Di production, Filament hanya mengizinkan akses panel bila model `User` mengimplementasikan `FilamentUser` dan `canAccessPanel` mengembalikan `true`. Tanpa itu, `/admin` menampilkan 403.
 
 ## Catatan teknis
 
